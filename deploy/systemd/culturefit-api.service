@@ -1,0 +1,24 @@
+[Unit]
+Description=Culture-fit Lab API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/culturefit/backend
+EnvironmentFile=/etc/culturefit/backend.env
+Environment=NODE_OPTIONS=--enable-source-maps
+ExecStart=/usr/bin/node /var/www/culturefit/backend/dist/src/server.js
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+KillSignal=SIGINT
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
